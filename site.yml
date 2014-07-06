@@ -1,0 +1,12 @@
+---
+- hosts: all
+  user: vagrant
+  sudo: yes
+  gather_facts: no
+
+- include: rabbitmq.yml
+- include: clients.yml
+- include: logstash.yml
+- include: elastic.yml
+- include: kibana.yml
+- include: loadbalancer.yml

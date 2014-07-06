@@ -1,0 +1,26 @@
+---
+- hosts: all
+  user: vagrant
+  sudo: yes
+  
+  tasks:
+   - name: Install Rabbitmq
+     apt: pkg=rabbitmq-server state=latest update_cache=yes
+   
+   - name: stop rabbitmq
+     service: name=rabbitmq-server state=stopped enabled=yes
+
+   - name: Fetch the RabbitMQ Erlang Cookie since we are clustering
+     copy: src=.erlang.cookie dest=/var/lib/rabbitmq/.erlang.cookie owner=rabbitmq group=rabbitmq mode=400
+
+   - name: Fetch the RabbitMQ config
+     copy: src=rabbitmq.config dest=/etc/rabbitmq/rabbitmq.config owner=root group=root mode=644
+   
+   - name: enable rabbitmq plugins
+     rabbitmq_plugin: names=rabbitmq_management,rabbitmq_tracing,rabbitmq_federation state=enabled
+
+#   - name: Remove mnesia
+#     shell: rm -rf /var/lib/rabbitmq/mnesia/   
+
+   - name: start rabbitmq after random sleep to stagger start
+     shell: sleep {{random}}; service rabbitmq-server start

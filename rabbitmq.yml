@@ -1,0 +1,10 @@
+---
+- hosts: rabbitmq
+  user: vagrant
+  sudo: yes
+  gather_facts: no
+  serial: 1
+
+  roles:
+    - common
+    - rabbitmq

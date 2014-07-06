@@ -1,0 +1,1 @@
+cluster_config: ['rabbit@rmq-node0', 'rabbit@rmq-node1', 'rabbit@rmq-node2']

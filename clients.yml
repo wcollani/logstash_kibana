@@ -1,0 +1,9 @@
+---
+- hosts: clients
+  user: vagrant
+  sudo: yes
+  gather_facts: no
+
+  roles:
+    - common
+    - clients

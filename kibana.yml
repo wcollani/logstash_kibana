@@ -1,0 +1,10 @@
+---
+- hosts: kibana
+  user: vagrant
+  sudo: yes
+  gather_facts: yes
+
+  roles:
+    - common
+    - nginx
+    - kibana

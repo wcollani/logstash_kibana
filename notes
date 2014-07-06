@@ -1,0 +1,20 @@
+# logstash indexer config:
+input { amqp {
+    name => 'logstash-queue'
+    type => 'direct'
+    host => 'rmq-node0'
+    exchange => 'logstash-exchange'
+    key => 'logstash-key'
+    exclusive => false
+    durable => false
+    auto_delete => false
+  }
+}
+output { stdout { debug => true } }
+
+# From the commandline
+beaver -D -c /etc/beaver/conf -C /etc/beaver/conf.d -P /etc/beaver/pid --logfile /var/log/beaver
+
+while true; do sleep 5; logger -p mail.err "We be dead"; sleep 5; logger "Standard Fair"; done
+sudo /opt/elasticsearch-1.1.1/bin/elasticsearch
+
